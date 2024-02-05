@@ -1,5 +1,12 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
+
+from .models import User
 
 
 def index(request):
-    return render(request, 'index.html')
+    users = User.objects.all()
+    page = request.GET.get('page')
+    paginator = Paginator(users, 4)
+    users = paginator.get_page(page)
+    return render(request, 'index.html', {'users': users})
