@@ -39,8 +39,11 @@
         {% if users.has_next %}
         <li class="page-item"><a class="page-link" href="{% url 'index' %}?page={{ users.next_page_number }}">Next</a></li>
         {% endif %}
-        <input type="number" name="paginat">
-        <button type="submit">SEND</button>
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="paginat">
+            <button type="submit">SEND</button>
+        </form>
     </ul>
 </nav>
 </div>
